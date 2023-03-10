@@ -89,19 +89,17 @@ app.MapPost("/runningtotal", async (int input) =>
         var total = totalString.Split("\r\n");
         if(total.Length == 2)
         {
-            File.AppendAllText(path, input.ToString() + Environment.NewLine);
             result = int.Parse(total[0]) + input;
         }
         else if(total.Length == 3)
         {
-            File.AppendAllText(path, input.ToString() + Environment.NewLine);
             result = int.Parse(total[0]) + int.Parse(total[1]) + input;
         }
         else
         {
-            File.AppendAllText(path, input.ToString() + Environment.NewLine);
             result = int.Parse(total[total.Length - 3]) + int.Parse(total[total.Length-2]) + input;
         }
+        File.AppendAllText(path, input.ToString() + Environment.NewLine);
         return Results.Ok(result);
     }
 });
